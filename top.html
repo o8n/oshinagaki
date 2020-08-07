@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<head><meta charset="UTF-8">
+  <title>お品書きジェネレータ</title>
+</head>
+
+<body onload="loadImage('preview');">
+  <p><canvas id="preview"></canvas></p>
+  <!-- <img src='00.png'> -->
+  <p>
+  <input type="text" id="canvas_text_1" value="ライターがすげえ観てる">
+  <button onclick="drawText('preview', 'canvas_text_1');">お品書きに並べる</button>
+  <br>
+  <input type="text" id="canvas_text_2" value="">
+  <button onclick="drawText('preview', 'canvas_text_2');">お品書きに並べる</button>
+  <br>
+  <input type="text" id="canvas_text_3" value="">
+  <button onclick="drawText('preview', 'canvas_text_3');">お品書きに並べる</button>
+  </p>
+
+  <script>
+
+    //キャンバスに画像を描画する
+    function loadImage(id) {
+      var image = new Image();
+      image.src = '00.png';
+      image.onload = (function () {
+        var canvas = document.getElementById(id);
+        var ctx = canvas.getContext('2d');
+        canvas.width = image.width;
+        canvas.height = image.height;
+        ctx.drawImage(image, 0, 0);
+      });
+    }
+
+    //キャンバスに文字を描く
+    function drawText(canvas_id, text_id) {
+      var canvas = document.getElementById(canvas_id);
+      var ctx = canvas.getContext('2d');
+      var text = document.getElementById(text_id);
+      //文字のスタイルを指定
+      ctx.font = '20px serif';
+      ctx.fillStyle = '#000000';
+      ctx.textBaseline = 'center';
+      ctx.textAlign = 'center';
+      var x = (canvas.width / 2);
+      var y = (canvas.height / 2);
+      ctx.fillText(text.value, x, y);
+    }
+
+    </script>
+</body>
+</html>
